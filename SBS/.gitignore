@@ -1,0 +1,96 @@
+﻿
+############################
+# ASP.NET Core / .NET Core #
+############################
+bin/
+obj/
+out/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+#########################
+# Rider / VS Code / JetBrains #
+#########################
+.idea/
+.vscode/
+*.code-workspace
+
+####################
+# OS Generated Files
+####################
+.DS_Store
+Thumbs.db
+
+#########################
+# ASP.NET Core Specific #
+#########################
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+.env
+*.db-shm
+*.db-wal
+
+#########################
+# Entity Framework Core #
+#########################
+Migrations/**/*Snapshot.cs
+Migrations/*Designer.cs
+
+#########################
+# User secrets directory #
+#########################
+**/.vs/
+**/.vscode/
+**/.vsconfig
+**/.userprefs
+
+######################
+# Log / Cache Files
+######################
+*.log
+logs/
+*.pid
+*.psess
+*.vspx
+*.ncb
+*.sdf
+*.cache
+*.dbmdl
+
+#########################
+# NuGet / Package Stuff #
+#########################
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+*.vsix
+.vs/
+
+#########################
+# Compiled Output #
+#########################
+*.dll
+*.exe
+*.pdb
+*.cache
+*.config
+*.zip
+
+#########################
+# macOS specific #
+#########################
+*.DS_Store
+
+#########################
+# Database / Local Dev Files #
+#########################
+*.sqlite
+*.db
