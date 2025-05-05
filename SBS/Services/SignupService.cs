@@ -6,15 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SBS.Services
 {
-	public class SignupService
+	public class SignupService(SbsDbContext context)
 	{
-		private readonly SbsDbContext _context;
-
-		public SignupService(SbsDbContext context)
-		{
-			_context = context ?? throw new ArgumentNullException(nameof(context));
-		}
-
+		private readonly SbsDbContext _context = context ?? throw new ArgumentNullException(nameof(context));
+		
 		public ResponseResult RegisterUser(SignupRequest request)
 		{
             Console.WriteLine($"EMAIL FROM REQUEST: {request.EmailAddress}");

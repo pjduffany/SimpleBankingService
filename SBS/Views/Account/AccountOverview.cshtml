@@ -1,0 +1,68 @@
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<div class="row-container">
+    <div class="left-column" style="flex: none;">
+        <div class="sign-up-content"style="margin-top: 10px;padding: 0px;">
+            <?php include "../welcome_message.php";?>
+        </div>
+    </div>
+    <div class="right-column">
+        <div class="sign-up-form-content" style="margin-top: 0px;">
+            <h3>Account Overview</h3>
+        </div>
+        <div class="content" >
+            <div class="left-column">
+                <?php include "./get_checking_info.php";?>
+                <h1>Account Info</h1>
+                <table id="userTable" class="display responsive nowrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>AccountId</th>
+                            <th>AccountType</th>
+                            <th>AccountBalance</th>
+                        </tr>
+                    </thead>
+                    <hr>
+                    <tbody>
+                    <tbody>
+                    <?php if (!empty($accts)): ?>
+                        <?php foreach ($accts as $acct): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($acct['accountId']); ?></td>
+                                <td><?php echo htmlspecialchars($acct['accountType']); ?></td>
+                                <td><?php echo htmlspecialchars($acct['accountBalance']); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="4">No accounts found. Please open one using our online tool.</td>
+                        </tr>
+                    <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="right-column">
+        <div class="sign-up-form-content" style="margin-top: 0px;">
+            <h3>Tools</h3>
+        </div>
+        <div class="content">
+            <div class="left-column">
+                <h2><a href="#products">Make Deposit</a></h2>
+                <p>Add some coin to your purse.</p>
+            </div>
+            <div class="left-column">
+                <h2><a href="../create_account.html">Make Payment</a></h2>
+                <p>Looking to fend off the loan sharks?</p>
+            </div>
+            <div class="left-column">
+                <h2><a href="#products">Document Management Center</a></h2>
+                <p>Manage all your documents here in our online portal.</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<div class="row-container">
+    <div class="left-column" style="flex: none;">
+        <div class="sign-up-content"style="margin-top: 10px;padding: 0px;">
+            <form>asp-controller="Account" asp-action="Index" method="get"></form> 
+        </div>
+    </div>
+    <div class="right-column">
+        <div class="sign-up-form-content" style="margin-top: 0px;">
+            <h3>Manage Your Accounts</h3>
+        </div>
+        <div class="content" >
+            <div class="left-column">
+                <h2><a asp-controller="Account" asp-action="AccountOverview">Account Overview</a></h2>
+                <p>Let's take a look and see how those numbers are doing!</p>
+            </div>
+            <div class="left-column">
+                <h2><a href="#products">Savings</a></h2>
+                <p>Use the power of compound interest to reach those long term goals.</p>
+            </div>
+            <div class="left-column">
+                <h2><a href="#products">Investing</a></h2>
+                <p>Ready for the future? Investing can be a great way to start building your wealth.</p>
+            </div>
+        </div>
+    </div>
+    <div class="right-column">
+        <div class="sign-up-form-content" style="margin-top: 0px;">
+            <h3>Tools</h3>
+        </div>
+        <div class="content">
+            <div class="left-column">
+                <h2><a href="#products">Pay your Bills</a></h2>
+                <p>Need to make a payment?</p>
+            </div>
+            <div class="left-column">
+                <h2><a asp-controller="Account" asp-action="CreateAccount">Open Account</a></h2>
+                <p>Opening a new account has never been easier!</p>
+            </div>
+            <div class="left-column">
+                <h2><a href="#products">Document Management Center</a></h2>
+                <p>Manage all your documents here in our online portal.</p>
+            </div>
+        </div>
+    </div>
+</div>

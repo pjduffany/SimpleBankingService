@@ -47,6 +47,23 @@ body {
             color: white;
         }
 
+/* Basic table styling */
+table.dataTable {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+table.dataTable th,
+table.dataTable td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+table.dataTable th {
+    background-color: #f4f4f4;
+}       
+
 .error-message {
     background-color: #ffdddd;
     color: #990000;

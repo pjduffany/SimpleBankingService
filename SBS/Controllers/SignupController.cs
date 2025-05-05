@@ -6,14 +6,9 @@ using SBS.Services;
 
 namespace SBS.Controllers
 {
-    public class SignupController : Controller
+    public class SignupController(SignupService signupService) : Controller
     {
-        private readonly SignupService _signupService;
-
-        public SignupController(SignupService signupService)
-        {
-            _signupService = signupService ?? throw new ArgumentNullException(nameof(signupService));
-        }
+        private readonly SignupService _signupService = signupService ?? throw new ArgumentNullException(nameof(signupService));
 
         // GET: /<controller>/
         public IActionResult Index()

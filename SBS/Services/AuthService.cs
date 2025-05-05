@@ -1,19 +1,15 @@
-﻿using System;
-using SBS.Models;
+﻿using SBS.Models;
 using SBS.Models.Entities;
 using SBS.Utils;
 
 namespace SBS.Services
 {
-	public class AuthService
+	public class AuthService(SbsDbContext context, IHttpContextAccessor contextAccessor)
 	{
-		private readonly SbsDbContext _context;
+		private readonly SbsDbContext _context = context ?? throw new ArgumentNullException(nameof(context));
 
-		public AuthService(SbsDbContext context)
-		{
-			_context = context ?? throw new ArgumentNullException(nameof(context));
-		}
-
+        private readonly IHttpContextAccessor _contextAccessor =
+            contextAccessor ?? throw new ArgumentNullException(nameof(contextAccessor));
         public ResponseResult ValidateUser(string email, string password)
         {
             var user = _context.Users.SingleOrDefault(u => u.Email == email);
@@ -38,6 +34,9 @@ namespace SBS.Services
                 };
             }
 
+            // set session user id
+            _contextAccessor.HttpContext?.Session.SetInt32("UserId", user.UserId);
+            
             return new ResponseResult { Success = true };
         }
     }

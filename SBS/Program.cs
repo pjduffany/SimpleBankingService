@@ -4,6 +4,7 @@ using SBS.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSession();
 builder.Services.AddControllersWithViews(); // register MVC
 builder.Services.AddDbContext<SbsDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -11,12 +12,15 @@ builder.Services.AddDbContext<SbsDbContext>(options =>
 // register services for DI
 builder.Services.AddScoped<SignupService>(); // one instance per HTTP request
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<AccountService>();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
 // enable serving static files from wwwroot
 app.UseStaticFiles();
 app.UseRouting();
+app.UseSession();
 
 app.MapControllerRoute(
         name: "default",
