@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: "CS492SBSPROJ!"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./docker/sqlserver:/var/opt/mssql/backup
+      - ./docker/sqlserver/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
