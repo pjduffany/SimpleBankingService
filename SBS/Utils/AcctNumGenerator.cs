@@ -10,9 +10,9 @@ public static class AcctNumGenerator
         var rng = new Random();
         return accountType switch
         {
-            AccountType.Checking => 1 + rng.Next(1000000000, 999999999).ToString(),
-            AccountType.Savings => 2 + rng.Next(1000000000, 999999999).ToString(),
-            AccountType.Investing => 3 + rng.Next(1000000000, 999999999).ToString(),
+            AccountType.Checking =>  1 + rng.Next(100000000, 999999999).ToString(),
+            AccountType.Savings =>   2 + rng.Next(100000000, 999999999).ToString(),
+            AccountType.Investing => 3 + rng.Next(100000000, 999999999).ToString(),
             _ => throw new ArgumentException("Invalid account type provided.")
         };
     }

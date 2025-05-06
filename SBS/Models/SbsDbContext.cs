@@ -9,6 +9,9 @@ namespace SBS.Models
 		{
 			modelBuilder.Entity<User>().ToTable("users");
 			modelBuilder.Entity<Account>().ToTable("accounts");
+			modelBuilder.Entity<Account>()
+				.Property(a => a.AccountType)
+				.HasConversion<string>();
 		}
 
         public DbSet<User> Users { get; set; }

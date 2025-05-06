@@ -16,9 +16,9 @@ namespace SBS.Models.Entities
 		public AccountType AccountType { get; set; }
 		[Required]
 		[Column("balance")]
-		public int Balance { get; set; }
+		public decimal Balance { get; set; }
 		[Required]
-		[Column("user_id")]
+		[Column("account_holder")]
 		public int AccountHolder { get; set; }
 		[Required]
 		[Column("created_on")]

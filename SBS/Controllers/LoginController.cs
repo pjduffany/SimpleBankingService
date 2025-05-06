@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Mvc;
+using SBS.Models.Entities;
 using SBS.Services;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,12 +22,14 @@ namespace SBS.Controllers
         public IActionResult Authenticate(string email, string password)
         {
             var response = _authService.ValidateUser(email, password);
+
             if (response.Success)
             {
+                
                 return RedirectToAction("Index", "Account");
             }
 
-            ViewBag.Error = response.ErrorMessage ?? "Login failed.";
+            ViewBag.Error = response.ErrorMessage ?? "Invalid username or password.";
             return View("Index");
         }
     }

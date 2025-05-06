@@ -33,7 +33,6 @@
     <Folder Include="Views\Signup\" />
     <Folder Include="wwwroot\login\" />
     <Folder Include="Models\Entities\" />
-    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\" />

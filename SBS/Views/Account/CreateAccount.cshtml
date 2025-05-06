@@ -1,6 +1,6 @@
 @{
     ViewBag.Title = "title";
-    Layout = "_Layout";
+    Layout = "_AuthenticatedLayout";
 }
 <div class="column-container">
     <div class="left-column">
@@ -38,9 +38,9 @@
                     <label for="accountType"><b>AccountType</b></label>
                     <select id="accountType" name="accountType">
                         <option value="" disabled selected>Select an option</option>
-                        <option value="checking">Checking</option>
-                        <option value="saving">Saving</option>
-                        <option value="investing">Investing</option>
+                        <option value="Checking">Checking</option>
+                        <option value="Savings">Saving</option>
+                        <option value="Investing">Investing</option>
                     </select>
     
                     <label for="depositAmount">

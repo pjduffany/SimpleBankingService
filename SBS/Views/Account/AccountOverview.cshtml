@@ -1,48 +1,47 @@
 
 @{
     ViewBag.Title = "title";
-    Layout = "_Layout";
+    Layout = "_AuthenticatedLayout";
 }
 <div class="row-container">
-    <div class="left-column" style="flex: none;">
-        <div class="sign-up-content"style="margin-top: 10px;padding: 0px;">
-            <?php include "../welcome_message.php";?>
-        </div>
-    </div>
     <div class="right-column">
-        <div class="sign-up-form-content" style="margin-top: 0px;">
+        <div class="sign-up-form-content">
             <h3>Account Overview</h3>
         </div>
         <div class="content" >
             <div class="left-column">
-                <?php include "./get_checking_info.php";?>
-                <h1>Account Info</h1>
-                <table id="userTable" class="display responsive nowrap" style="width:100%">
-                    <thead>
+                <div class="table-wrapper">
+                    @model IEnumerable<SBS.Models.Entities.Account>
+                    <table class="dataTable">
+                        <thead>
                         <tr>
-                            <th>AccountId</th>
-                            <th>AccountType</th>
-                            <th>AccountBalance</th>
+                            <th>Account ID</th>
+                            <th>Account Type</th>
+                            <th>Balance</th>
                         </tr>
-                    </thead>
-                    <hr>
-                    <tbody>
-                    <tbody>
-                    <?php if (!empty($accts)): ?>
-                        <?php foreach ($accts as $acct): ?>
+                        </thead>
+                        <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var acct in Model)
+                            {
+                                <tr>
+                                    <td>@acct.AccountNumber</td>
+                                    <td>@acct.AccountType</td>
+                                    <td class="@(acct.Balance < 0 ? "negative-balance" : "")">
+                                        @acct.Balance.ToString("C")
+                                    </td> </tr>
+                            }
+                        }
+                        else
+                        {
                             <tr>
-                                <td><?php echo htmlspecialchars($acct['accountId']); ?></td>
-                                <td><?php echo htmlspecialchars($acct['accountType']); ?></td>
-                                <td><?php echo htmlspecialchars($acct['accountBalance']); ?></td>
+                                <td colspan="3">No accounts found. Please open one using our online tool.</td>
                             </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="4">No accounts found. Please open one using our online tool.</td>
-                        </tr>
-                    <?php endif; ?>
-                    </tbody>
-                </table>
+                        }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

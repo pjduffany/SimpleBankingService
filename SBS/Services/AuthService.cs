@@ -22,7 +22,6 @@ namespace SBS.Services
                     ErrorMessage = "User not found."
                 };
             }
-            Console.WriteLine($"Email: {email} | Password: {password} | Hash: {user.PasswordHash} | Salt: {user.Salt}");
             var passwordValid = PasswordHasher.Verify(password, user.PasswordHash, user.Salt);
 
             if (!passwordValid)
@@ -30,14 +29,18 @@ namespace SBS.Services
                 return new ResponseResult
                 {
                     Success = false,
-                    ErrorMessage = "Invalid password."
+                    ErrorMessage = "Invalid username or password."
                 };
             }
-
-            // set session user id
-            _contextAccessor.HttpContext?.Session.SetInt32("UserId", user.UserId);
+            SetUserId(user);
             
             return new ResponseResult { Success = true };
+        }
+
+        private void SetUserId(User user)
+        {
+            // set session user id
+            _contextAccessor.HttpContext?.Session.SetInt32("UserId", user.UserId);
         }
     }
 }

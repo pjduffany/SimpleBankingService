@@ -1,5 +1,7 @@
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SBS.Models.Entities;
 using SBS.Models;
 using SBS.Models.Entities;
@@ -10,14 +12,14 @@ namespace SBS.Services;
 public class AccountService (SbsDbContext context, IHttpContextAccessor accessor)
 {
     private readonly SbsDbContext _context = context ?? throw new ArgumentNullException(nameof(context));
-    private readonly IHttpContextAccessor _accessor = accessor ?? throw new ArgumentNullException(nameof(accessor));
+    private readonly IHttpContextAccessor _contextAccessor = accessor ?? throw new ArgumentNullException(nameof(accessor));
     
-    public ResponseResult CreateAccount(int userId, AccountType acctType, int amount)
+    public ResponseResult CreateAccount(AccountType acctType, int amount)
     {
         try
         {
             var acctNumber = AcctNumGenerator.GenerateAccountNumber(acctType);
-
+            var userId = GetUserIdFromSession();
             if (_context.Accounts.Any(x => x.AccountNumber == acctNumber)) // SELECT 1 WHERE
             {
                 return new ResponseResult
@@ -55,4 +57,35 @@ public class AccountService (SbsDbContext context, IHttpContextAccessor accessor
             };
         }
     }
+
+    public async Task<List<Account>> GetAccountInfo(User user)
+    {
+        var userId = GetUserIdFromSession();
+        return await _context.Accounts.
+            Where(x => x.AccountHolder == userId).
+            ToListAsync();
+    }
+
+    public User GetUserInfo()
+    {
+        var userId = GetUserIdFromSession();
+        
+        return _context.Users.SingleOrDefault(x => x.UserId == userId) ?? throw new InvalidOperationException($"User not found for user: {userId}.");
+
+    }
+
+    private int GetUserIdFromSession()
+    {
+        var userId = _contextAccessor.HttpContext?.Session.GetInt32("UserId") != null 
+            ? Convert.ToInt32(_contextAccessor.HttpContext.Session.GetInt32("UserId")) 
+            : -1;
+
+        if (userId == -1)
+        {
+            throw new InvalidOperationException("UserId was not found for the current session.");
+        } 
+        return userId;
+    }
+    
+    
 }
