@@ -17,8 +17,10 @@ namespace SBS.Utils
 		public static (byte[] Hash, byte[] Salt) HashPassword(string password)
 		{
 			using var hmac = new HMACSHA256();
-			// return (hash, salt)
-			return (hmac.ComputeHash(Encoding.UTF8.GetBytes(password)), hmac.Key);
+			var salt = hmac.Key;
+			var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+			
+			return (hash, salt);
 		}
 	}
 }

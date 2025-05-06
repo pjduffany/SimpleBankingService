@@ -1,14 +1,33 @@
-﻿using System;
-namespace SBS.Model.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SBS.Models.Entities
 {
 	public class Account
 	{
+		[Required]
+		[Column("account_id")]
 		public int AccountId { get; set; }
+		[Required]
+		[Column("account_number")]
+		public string AccountNumber { get; set; }
+		[Required]
+		[Column("account_type")]
 		public AccountType AccountType { get; set; }
-		public int Balance { get; set; }
-		public string AccountHolder { get; set; }
+		[Required]
+		[Column("balance")]
+		public decimal Balance { get; set; }
+		[Required]
+		[Column("account_holder")]
+		public int AccountHolder { get; set; }
+		[Required]
+		[Column("created_on")]
 		public DateTime CreatedOn { get; set; }
+		[Required]
+		[Column("last_accessed_on")]
 		public DateTime LastAccessedOn { get; set; }
+		[Required]
+		[Column("enabled")]
 		public Boolean Enabled { get; set; }
 	}
 }

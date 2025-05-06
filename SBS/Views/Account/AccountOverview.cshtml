@@ -1,0 +1,67 @@
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_AuthenticatedLayout";
+}
+<div class="row-container">
+    <div class="right-column">
+        <div class="sign-up-form-content">
+            <h3>Account Overview</h3>
+        </div>
+        <div class="content" >
+            <div class="left-column">
+                <div class="table-wrapper">
+                    @model IEnumerable<SBS.Models.Entities.Account>
+                    <table class="dataTable">
+                        <thead>
+                        <tr>
+                            <th>Account ID</th>
+                            <th>Account Type</th>
+                            <th>Balance</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var acct in Model)
+                            {
+                                <tr>
+                                    <td>@acct.AccountNumber</td>
+                                    <td>@acct.AccountType</td>
+                                    <td class="@(acct.Balance < 0 ? "negative-balance" : "")">
+                                        @acct.Balance.ToString("C")
+                                    </td> </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="3">No accounts found. Please open one using our online tool.</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right-column">
+        <div class="sign-up-form-content" style="margin-top: 0px;">
+            <h3>Tools</h3>
+        </div>
+        <div class="content">
+            <div class="left-column">
+                <h2><a href="#products">Make Deposit</a></h2>
+                <p>Add some coin to your purse.</p>
+            </div>
+            <div class="left-column">
+                <h2><a href="../create_account.html">Make Payment</a></h2>
+                <p>Looking to fend off the loan sharks?</p>
+            </div>
+            <div class="left-column">
+                <h2><a href="#products">Document Management Center</a></h2>
+                <p>Manage all your documents here in our online portal.</p>
+            </div>
+        </div>
+    </div>
+</div>

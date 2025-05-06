@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
+using SBS.Models.Entities;
 using SBS.Services;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SBS.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController(AuthService authService) : Controller
     {
-        private readonly AuthService _authService;
-
-        public LoginController(AuthService authService)
-        {
-            _authService = authService ?? throw new ArgumentNullException(nameof(authService));
-        }
+        private readonly AuthService _authService = authService ?? throw new ArgumentNullException(nameof(authService));
 
         // GET: /<controller>/
         [HttpGet]
@@ -29,12 +22,14 @@ namespace SBS.Controllers
         public IActionResult Authenticate(string email, string password)
         {
             var response = _authService.ValidateUser(email, password);
+
             if (response.Success)
             {
-                return RedirectToAction("Dashboard", "User");
+                
+                return RedirectToAction("Index", "Account");
             }
 
-            ViewBag.Error = response.ErrorMessage ?? "Login failed.";
+            ViewBag.Error = response.ErrorMessage ?? "Invalid username or password.";
             return View("Index");
         }
     }

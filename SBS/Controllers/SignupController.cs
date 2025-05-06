@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Mvc;
 using SBS.Models.Entities;
 using SBS.Services;
 
@@ -6,14 +7,9 @@ using SBS.Services;
 
 namespace SBS.Controllers
 {
-    public class SignupController : Controller
+    public class SignupController(SignupService signupService) : Controller
     {
-        private readonly SignupService _signupService;
-
-        public SignupController(SignupService signupService)
-        {
-            _signupService = signupService ?? throw new ArgumentNullException(nameof(signupService));
-        }
+        private readonly SignupService _signupService = signupService ?? throw new ArgumentNullException(nameof(signupService));
 
         // GET: /<controller>/
         public IActionResult Index()
@@ -24,6 +20,15 @@ namespace SBS.Controllers
         [HttpPost]
         public IActionResult Register(SignupRequest request)
         {
+            var pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{10,}$";
+            bool isValid = Regex.IsMatch(request.Password, pattern);
+
+            if (!isValid)
+            {
+                ViewBag.Error = "Password must be at least 10 characters long and include an uppercase letter, lowercase letter, number, and special character.";
+                return View("Index");
+            }
+            
             var result = _signupService.RegisterUser(request);
 
             if (result.Success)

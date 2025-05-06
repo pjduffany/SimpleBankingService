@@ -1,5 +1,5 @@
 ﻿using System;
-namespace SBS.Model.Entities
+namespace SBS.Models.Entities
 {
 	public enum AccountType
 	{

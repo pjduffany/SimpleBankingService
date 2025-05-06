@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/site.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Simple Banking Service</title>
+</head>
+<body>
+    <nav class="navbar">
+        <h2>
+            <a asp-controller="Account" asp-action="Index">Simple Banking Service</a>
+        </h2>
+        <form asp-controller="Account" asp-action="Logout" method="post">
+            <button type="submit" class="sign-up-button" style="top: 5px;right: 10px;outline: none;">Logout</button>
+        </form>
+    </nav>
+    <div class="page-container">
+        <main class="content-wrap">
+            @if (ViewBag.Error != null)
+            {
+                <div class="error-message" style="color: red; font-weight: bold; margin-bottom: 20px;">
+                    @ViewBag.Error
+                </div>
+            }
+
+            @RenderBody()
+        </main>
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 Simple Banking Service. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
