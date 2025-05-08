@@ -45,7 +45,7 @@ public class AccountController(AccountService acctService) : Controller
         if (responseResult.Success)
         {
             ViewBag.Message = "Account created successfully";
-            return View();
+            return View("Index");
         }
 
         ViewBag.ErrorMessage = responseResult.ErrorMessage;
