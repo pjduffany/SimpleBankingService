@@ -25,7 +25,6 @@ namespace SBS.Controllers
 
             if (response.Success)
             {
-                
                 return RedirectToAction("Index", "Account");
             }
 
